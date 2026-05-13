@@ -1,0 +1,72 @@
+type Book {
+    id: ID!
+    title: String!
+    isbn: String!
+    description: String
+    facultyId: ID!
+    currentVersion: Int!
+    status: BookStatus!
+    createdAt: String!
+    updatedAt: String!
+}
+
+type BookVersion {
+    id: ID!
+    bookId: ID!
+    versionNumber: Int!
+    content: String!
+    changeLog: String
+    createdAt: String!
+}
+
+enum BookStatus {
+    DRAFT
+    REVIEW
+    PUBLISHED
+    ARCHIVED
+}
+
+input CreateBookInput {
+    title: String!
+    isbn: String!
+    description: String
+    facultyId: ID!
+    initialContent: String!
+}
+
+input UpdateBookInput {
+    id: ID!
+    title: String
+    description: String
+}
+
+input VersionBookInput {
+    bookId: ID!
+    content: String!
+    changeLog: String
+}
+
+input BookSearchCriteria {
+    title: String
+    isbn: String
+    facultyId: ID
+    status: BookStatus
+    page: Int
+    size: Int
+}
+
+type Query {
+    getBookById(id: ID!): Book
+    searchBooks(criteria: BookSearchCriteria): [Book]
+    getBooksByFaculty(facultyId: ID!): [Book]
+    getBookVersions(bookId: ID!): [BookVersion]
+}
+
+type Mutation {
+    createBook(input: CreateBookInput!): Book
+    updateBook(input: UpdateBookInput!): Book
+    deleteBook(id: ID!): Boolean
+    publishBook(id: ID!): Book
+    archiveBook(id: ID!): Book
+    versionBook(input: VersionBookInput!): Book
+}

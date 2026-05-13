@@ -1,0 +1,24 @@
+#spring:
+#  application:
+#    name: librosphere-book-module
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/book_db?createDatabaseIfNotExist=true
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  #  ${DB_PASSWORD:root}
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQLDialect
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#
+#  graphql:
+#    graphiql:
+#      enabled: true
+#      path: /graphiql
+#
+#logging:
+#  level:
+#    org.hibernate.SQL: DEBUG
+#    org.springframework.graphql: DEBUG
