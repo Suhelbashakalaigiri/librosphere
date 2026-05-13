@@ -12,6 +12,7 @@ public interface BookService {
     BookDto versionBook(VersionBookInput input);
     
     BookDto getBookById(Long id);
+    BookDto updateBookStatus(Long id, com.librosphere.book.enums.BookStatus status);
     List<BookDto> searchBooks(BookSearchCriteria criteria);
     List<BookDto> getBooksByFaculty(Long facultyId);
     List<BookVersionDto> getBookVersions(Long bookId);

@@ -133,6 +133,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
+    public BookDto updateBookStatus(Long id, BookStatus status) {
+        return transitionState(id, status);
+    }
+
+    @Override
     public List<BookDto> searchBooks(BookSearchCriteria criteria) {
         Specification<Book> spec = (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
