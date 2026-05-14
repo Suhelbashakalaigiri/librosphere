@@ -77,8 +77,7 @@ public class GlobalGraphQlExceptionHandler {
         logger.error("Unexpected error occurred", ex);
 
         return GraphqlErrorBuilder.newError(env)
-                .message("Internal Server Error")
-                .errorType(ErrorType.INTERNAL_ERROR)
+                .message(ex.getMessage())
                 .build();
     }
 }

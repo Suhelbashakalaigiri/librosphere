@@ -1,0 +1,47 @@
+extend type Query {
+    getReviewStatus(bookId: ID!): ReviewResponse
+    getReviewHistory(bookId: ID!): [ReviewHistoryResponse]
+}
+
+extend type Mutation {
+    submitBookForReview(bookId: ID!): ReviewResponse
+    approveBook(reviewId: ID!): ReviewResponse
+    rejectBook(reviewId: ID!, reason: String!): ReviewResponse
+    requestChanges(reviewId: ID!, feedback: String!): ReviewResponse
+}
+
+type ReviewResponse {
+    id: ID!
+    bookId: ID!
+    reviewerId: ID
+    status: ReviewStatus!
+    feedback: String
+    reviewedAt: String
+    createdAt: String!
+    updatedAt: String!
+}
+
+type ReviewHistoryResponse {
+    id: ID!
+    bookId: ID!
+    action: ReviewAction!
+    previousState: String!
+    newState: String!
+    remarks: String
+    performedBy: ID
+    performedAt: String!
+}
+
+enum ReviewStatus {
+    PENDING
+    APPROVED
+    REJECTED
+    CHANGES_REQUESTED
+}
+
+enum ReviewAction {
+    SUBMIT
+    APPROVE
+    REJECT
+    REQUEST_CHANGES
+}
