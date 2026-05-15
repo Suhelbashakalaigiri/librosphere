@@ -7,6 +7,7 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -16,7 +17,7 @@ public class LendingController {
     private final LendingService lendingService;
 
     @MutationMapping
-    public IssueResponse issueBook(@Argument IssueBookInput input) {
+    public IssueResponse issueBook(@Argument @Valid IssueBookInput input) {
 
         return lendingService.issueBook(input);
     }
@@ -32,7 +33,7 @@ public class LendingController {
     }
 
     @MutationMapping
-    public List<IssueResponse> bulkIssueBooks(@Argument BulkIssueInput input) {
+    public List<IssueResponse> bulkIssueBooks(@Argument @Valid BulkIssueInput input) {
         return lendingService.bulkIssueBooks(input);
     }
 
@@ -52,12 +53,12 @@ public class LendingController {
     }
 
     @MutationMapping
-    public InventoryDto initializeInventory(@Argument InitializeInventoryInput input) {
+    public InventoryDto initializeInventory(@Argument @Valid InitializeInventoryInput input) {
         return lendingService.initializeInventory(input);
     }
 
     @MutationMapping
-    public InventoryDto updateInventory(@Argument UpdateInventoryInput input) {
+    public InventoryDto updateInventory(@Argument @Valid UpdateInventoryInput input) {
         return lendingService.updateInventory(input);
     }
 
