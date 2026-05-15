@@ -1,0 +1,71 @@
+extend type Query {
+    getIssuedBooksByUser(userId: ID!): [IssueDto]
+    getIssueHistory(bookId: ID!): [IssueDto]
+    getDueDates(userId: ID!): [IssueDto]
+    getInventoryByBookId(bookId: ID!): InventoryDto
+    getAllInventories: [InventoryDto]
+}
+
+extend type Mutation {
+    issueBook(input: IssueBookInput!): IssueResponse
+    returnBook(issueId: ID!): IssueResponse
+    renewBook(issueId: ID!): IssueResponse
+    bulkIssueBooks(input: BulkIssueInput!): [IssueResponse]
+    initializeInventory(input: InitializeInventoryInput!): InventoryDto
+    updateInventory(input: UpdateInventoryInput!): InventoryDto
+}
+
+type IssueDto {
+    id: ID!
+    bookId: ID!
+    userId: ID!
+    issueDate: String!
+    dueDate: String!
+    returnDate: String
+    status: IssueStatus!
+    renewalCount: Int!
+    penaltyAmount: Float!
+    requestId: String!
+}
+
+type InventoryDto {
+    id: ID!
+    bookId: ID!
+    totalCopies: Int!
+    availableCopies: Int!
+    reservedCopies: Int!
+    updatedAt: String!
+}
+
+type IssueResponse {
+    issue: IssueDto
+    message: String
+    success: Boolean!
+}
+
+enum IssueStatus {
+    REQUESTED
+    ISSUED
+    RETURNED
+    OVERDUE
+}
+
+input IssueBookInput {
+    bookId: ID!
+    userId: ID!
+    requestId: String!
+}
+
+input BulkIssueInput {
+    issues: [IssueBookInput!]!
+}
+
+input InitializeInventoryInput {
+    bookId: ID!
+    totalCopies: Int!
+}
+
+input UpdateInventoryInput {
+    bookId: ID!
+    changeInCopies: Int!
+}

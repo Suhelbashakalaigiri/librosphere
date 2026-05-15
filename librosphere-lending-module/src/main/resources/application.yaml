@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: librosphere-lending-module
