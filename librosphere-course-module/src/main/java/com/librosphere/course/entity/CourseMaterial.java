@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "course_materials", indexes = {
     @Index(name = "idx_course_id", columnList = "courseId"),
-    @Index(name = "idx_book_version_id", columnList = "bookVersionId")
+    @Index(name = "idx_book_version", columnList = "bookVersion")
 })
 @Data
 @Builder
@@ -33,7 +33,7 @@ public class CourseMaterial {
     private Book book;
 
     @Column(nullable = false)
-    private Long bookVersionId;
+    private Integer bookVersion;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

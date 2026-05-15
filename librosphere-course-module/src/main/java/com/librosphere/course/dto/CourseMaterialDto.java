@@ -8,7 +8,7 @@ public record CourseMaterialDto(
     Long id,
     Long courseId,
     BookDto book,
-    Long bookVersionId,
+    Integer bookVersion,
     MaterialType materialType,
     String assignedBy,
     LocalDateTime assignedAt,

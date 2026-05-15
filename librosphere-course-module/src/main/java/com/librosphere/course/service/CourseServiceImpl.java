@@ -77,7 +77,7 @@ public class CourseServiceImpl implements CourseService {
         }
 
         boolean versionExists = bookService.getBookVersions(input.bookId()).stream()
-                .anyMatch(v -> Objects.equals(v.id(), input.bookVersionId()));
+                .anyMatch(v -> Objects.equals(v.versionNumber(), input.bookVersion()));
         if (!versionExists) {
             throw new BookVersionMismatchException("Book version not found or does not belong to the book.");
         }
@@ -93,7 +93,7 @@ public class CourseServiceImpl implements CourseService {
         CourseMaterial material = CourseMaterial.builder()
                 .courseId(input.courseId())
                 .book(bookMapper.toEntity(bookService.getBookById(input.bookId())))
-                .bookVersionId(input.bookVersionId())
+                .bookVersion(input.bookVersion())
                 .materialType(input.materialType())
                 .assignedBy(input.assignedBy())
                 .build();
@@ -108,7 +108,7 @@ public class CourseServiceImpl implements CourseService {
                 material.getId(),
                 material.getCourseId(),
                 material.getBook().getId(),
-                material.getBookVersionId(),
+                material.getBookVersion(),
                 material.getMaterialType(),
                 material.getAssignedBy()
         ));
@@ -123,13 +123,13 @@ public class CourseServiceImpl implements CourseService {
                 .orElseThrow(() -> new RuntimeException("Course material not found"));
 
         // Validate Book Version consistency if changed
-        if (!Objects.equals(material.getBookVersionId(), input.bookVersionId())) {
+        if (!Objects.equals(material.getBookVersion(), input.bookVersion())) {
             boolean versionExists = bookService.getBookVersions(material.getBook().getId()).stream()
-                    .anyMatch(v -> Objects.equals(v.id(), input.bookVersionId()));
+                    .anyMatch(v -> Objects.equals(v.versionNumber(), input.bookVersion()));
             if (!versionExists) {
                 throw new BookVersionMismatchException("Book version not found or does not belong to the book.");
             }
-            material.setBookVersionId(input.bookVersionId());
+            material.setBookVersion(input.bookVersion());
         }
 
         material.setMaterialType(input.materialType());
@@ -143,7 +143,7 @@ public class CourseServiceImpl implements CourseService {
                 material.getId(),
                 material.getCourseId(),
                 material.getBook().getId(),
-                material.getBookVersionId(),
+                material.getBookVersion(),
                 material.getMaterialType(),
                 input.updatedBy()
         ));
@@ -191,7 +191,7 @@ public class CourseServiceImpl implements CourseService {
                 .courseMaterialId(material.getId())
                 .courseId(material.getCourseId())
                 .bookId(material.getBook().getId())
-                .bookVersionId(material.getBookVersionId())
+                .bookVersion(material.getBookVersion())
                 .materialType(material.getMaterialType())
                 .action(action)
                 .performedBy(performedBy)

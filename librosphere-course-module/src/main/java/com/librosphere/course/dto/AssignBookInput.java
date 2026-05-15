@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 public record AssignBookInput(
     @NotNull Long courseId,
     @NotNull Long bookId,
-    @NotNull Long bookVersionId,
+    @NotNull Integer bookVersion,
     @NotNull MaterialType materialType,
     @NotNull String assignedBy
 ) {}

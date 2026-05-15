@@ -6,7 +6,7 @@ public record BookAssignedToCourseEvent(
     Long courseMaterialId,
     Long courseId,
     Long bookId,
-    Long bookVersionId,
+    Integer bookVersion,
     MaterialType materialType,
     String assignedBy
 ) {}

@@ -6,7 +6,7 @@ public record CourseMaterialUpdatedEvent(
     Long courseMaterialId,
     Long courseId,
     Long bookId,
-    Long bookVersionId,
+    Integer bookVersion,
     MaterialType materialType,
     String updatedBy
 ) {}

@@ -28,7 +28,7 @@ public class CourseMaterialHistory {
     private Long bookId;
 
     @Column(nullable = false)
-    private Long bookVersionId;
+    private Integer bookVersion;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

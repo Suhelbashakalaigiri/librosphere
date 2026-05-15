@@ -40,7 +40,7 @@ type CourseMaterial {
     id: ID!
     courseId: ID!
     book: Book!
-    bookVersionId: ID!
+    bookVersion: Int!
     materialType: MaterialType!
     assignedBy: String!
     assignedAt: String!
@@ -56,7 +56,7 @@ enum MaterialType {
 input AssignBookInput {
     courseId: ID!
     bookId: ID!
-    bookVersionId: ID!
+    bookVersion: Int!
     materialType: MaterialType!
     assignedBy: String!
 }
@@ -64,6 +64,6 @@ input AssignBookInput {
 input UpdateCourseMaterialInput {
     courseMaterialId: ID!
     materialType: MaterialType!
-    bookVersionId: ID!
+    bookVersion: Int!
     updatedBy: String!
 }

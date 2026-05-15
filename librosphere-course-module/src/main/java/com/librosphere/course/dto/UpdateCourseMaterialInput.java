@@ -6,6 +6,6 @@ import jakarta.validation.constraints.NotNull;
 public record UpdateCourseMaterialInput(
     @NotNull Long courseMaterialId,
     @NotNull MaterialType materialType,
-    @NotNull Long bookVersionId,
+    @NotNull Integer bookVersion,
     @NotNull String updatedBy
 ) {}
