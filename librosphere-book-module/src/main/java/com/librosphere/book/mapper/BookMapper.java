@@ -8,4 +8,5 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
 public interface BookMapper {
     BookDto toDto(Book book);
+    Book toEntity(BookDto bookDto);
 }

@@ -1,0 +1,69 @@
+extend type Query {
+    getCourseMaterials(courseId: ID!): [CourseMaterial]
+    getBooksByCourse(courseId: ID!): [Book]
+    getAllCourses: [CourseDto]
+}
+
+extend type Mutation {
+    createCourse(input: CreateCourseInput!): CourseDto
+    updateCourse(updateCourseInput: UpdateCourseInput!): CourseDto
+    assignBookToCourse(input: AssignBookInput!): CourseMaterial
+    updateCourseMaterial(input: UpdateCourseMaterialInput!): CourseMaterial
+    removeBookFromCourse(courseMaterialId: ID!, removedBy: String!): Boolean
+}
+
+input UpdateCourseInput {
+    id: ID!
+    courseCode: String!
+    courseName: String!
+    semester: String!,
+    credits: Int!
+
+}
+input CreateCourseInput {
+    courseCode: String!
+    courseName: String!
+    department: String!
+    semester: String!
+    credits: Int!
+}
+
+type CourseDto{
+    id: ID!
+    courseCode: String!
+    courseName: String!
+    department: String!
+    semester: String!,
+    credits: Int!
+}
+type CourseMaterial {
+    id: ID!
+    courseId: ID!
+    book: Book!
+    bookVersionId: ID!
+    materialType: MaterialType!
+    assignedBy: String!
+    assignedAt: String!
+    active: Boolean!
+}
+
+enum MaterialType {
+    MANDATORY
+    OPTIONAL
+    REFERENCE
+}
+
+input AssignBookInput {
+    courseId: ID!
+    bookId: ID!
+    bookVersionId: ID!
+    materialType: MaterialType!
+    assignedBy: String!
+}
+
+input UpdateCourseMaterialInput {
+    courseMaterialId: ID!
+    materialType: MaterialType!
+    bookVersionId: ID!
+    updatedBy: String!
+}

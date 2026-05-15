@@ -10,6 +10,7 @@ type Book {
     updatedAt: String!
 }
 
+
 type BookVersion {
     id: ID!
     bookId: ID!
