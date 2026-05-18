@@ -37,6 +37,7 @@
         <module>librosphere-review-module</module>
         <module>librosphere-course-module</module>
         <module>librosphere-lending-module</module>
+        <module>librosphere-reserve-module</module>
         <module>application</module>
     </modules>
 	<dependencies>
